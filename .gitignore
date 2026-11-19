@@ -9,3 +9,6 @@ obj/
 
 # Converter previews (only for checking how a painting looks)
 tools/previews/
+
+# Python cache
+__pycache__/

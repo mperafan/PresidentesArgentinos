@@ -1,4 +1,4 @@
 displayName = Presidentes Argentinos
 author = mperafan
 version = 0.1
-buildIgnore = tools/*, *.md, .git*
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git*, tools\*, assets\*, *.md

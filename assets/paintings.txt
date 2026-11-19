@@ -1,0 +1,20 @@
+# One line per photo. Columns, separated by |
+#
+#   photo file | Name (one word, used in code) | Name shown in game | focus | size | recipe
+#
+# focus:  face center x, center y, crop height (fractions of the photo, 0-1)
+#         e.g. 0.5,0.3,0.55 = face in the middle, a bit high, crop 55% of the photo's height
+#         "-" = use the whole photo
+# size:   width x height in tiles ("-" = 3x4)
+# recipe: Terraria item names and amounts, at a Sawmill.
+#         "Wood" means any wood. "-" = 10 Wood + a unique extra ingredient.
+#
+# Photos in assets/ without a line here still work, with all defaults.
+
+alberto.jpg    | AlbertoFernandez | Alberto Fernández              | 0.50,0.40,0.72 | 3x4 | Wood 10, Amethyst 1
+cfk.jpg        | CristinaKirchner | Cristina Fernández de Kirchner | 0.45,0.30,0.55 | 3x4 | Wood 10, Topaz 1
+javo.jpg       | JavierMilei      | Javier Milei                   | 0.47,0.32,0.55 | 3x4 | Wood 10, Sapphire 1
+macri.jpeg     | MauricioMacri    | Mauricio Macri                 | 0.53,0.21,0.30 | 3x4 | Wood 10, Emerald 1
+peron.jpg      | JuanPeron        | Juan Domingo Perón             | 0.50,0.28,0.55 | 3x4 | Wood 10, Ruby 1
+roca.jpeg      | JulioRoca        | Julio Argentino Roca           | 0.42,0.33,0.55 | 3x4 | Wood 10, Diamond 1
+sarmiento.jpeg | DomingoSarmiento | Domingo Faustino Sarmiento     | 0.47,0.26,0.50 | 3x4 | Wood 10, Amber 1
