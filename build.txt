@@ -1,0 +1,3 @@
+displayName = Pink Bunny Mod
+author = mperafan
+version = 0.1

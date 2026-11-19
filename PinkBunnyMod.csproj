@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Import tModLoader mod properties (the file lives one folder up, in ModSources) -->
+  <Import Project="..\tModLoader.targets" />
+
+  <!-- General -->
+  <PropertyGroup>
+    <AssemblyName>PinkBunnyMod</AssemblyName>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- References -->
+  <ItemGroup>
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
+  </ItemGroup>
+</Project>
