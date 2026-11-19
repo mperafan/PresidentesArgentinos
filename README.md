@@ -18,19 +18,32 @@ as paintings you hang on walls. Each painting has its own recipe at a **Sawmill*
 ## Try it in the game
 
 1. Install **tModLoader** (free on Steam) and the **.NET 8 SDK**.
-2. Clone this repo into tModLoader's mod sources folder:
+2. Download **`PresidentesArgentinos.zip`** from the
+   [latest release](https://github.com/mperafan/PresidentesArgentinos/releases/latest).
+3. Extract it into tModLoader's mod sources folder, so you end up with
+   `ModSources\PresidentesArgentinos\build.txt`:
    ```
-   cd "%USERPROFILE%\Documents\My Games\Terraria\tModLoader\ModSources"
-   git clone https://github.com/mperafan/PresidentesArgentinos.git
+   %USERPROFILE%\Documents\My Games\Terraria\tModLoader\ModSources\
    ```
-3. In tModLoader: **Workshop → Develop Mods → Build + Reload** next to Presidentes Argentinos.
-4. In a world: build a **Sawmill**, then craft a painting and hang it on a background wall.
+   The folder **must** be named exactly `PresidentesArgentinos`: tModLoader uses the folder
+   name as the mod's name. (GitHub's green "Code → Download ZIP" button names it
+   `PresidentesArgentinos-main`, which won't work unless you rename it.)
+4. In tModLoader: **Workshop → Develop Mods → Build + Reload** next to Presidentes Argentinos.
+5. In a world: build a **Sawmill**, then craft a painting and hang it on a background wall.
+
+With git instead of the zip:
+```
+cd "%USERPROFILE%\Documents\My Games\Terraria\tModLoader\ModSources"
+git clone https://github.com/mperafan/PresidentesArgentinos.git
+```
 
 ## Adding a painting
 
-1. Put a photo in `assets/`.
+1. Put a photo in `assets/` (or finished pixel art, marked `pixelart` in the next step).
 2. Add a line for it to `assets/paintings.txt` (name, face crop, size, recipe; the file explains each column).
    Without a line, it still works with defaults.
+
+The paintings in `assets/` are already pixel art. The original photos are kept out of the repo.
 3. Run the converter (needs Python and `pip install Pillow`):
    ```
    python tools/build_paintings.py

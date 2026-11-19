@@ -12,3 +12,6 @@ tools/previews/
 
 # Python cache
 __pycache__/
+
+# Original photos (kept only on this computer)
+assets/originals/

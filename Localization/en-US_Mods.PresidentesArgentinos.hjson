@@ -8,13 +8,13 @@ Items: {
 		DisplayName: Portrait of Cristina Fernández de Kirchner
 		Tooltip: A painting of Cristina Fernández de Kirchner
 	}
+	DomingoSarmiento: {
+		DisplayName: Portrait of Domingo Faustino Sarmiento
+		Tooltip: A painting of Domingo Faustino Sarmiento
+	}
 	JavierMilei: {
 		DisplayName: Portrait of Javier Milei
 		Tooltip: A painting of Javier Milei
-	}
-	MauricioMacri: {
-		DisplayName: Portrait of Mauricio Macri
-		Tooltip: A painting of Mauricio Macri
 	}
 	JuanPeron: {
 		DisplayName: Portrait of Juan Domingo Perón
@@ -24,8 +24,8 @@ Items: {
 		DisplayName: Portrait of Julio Argentino Roca
 		Tooltip: A painting of Julio Argentino Roca
 	}
-	DomingoSarmiento: {
-		DisplayName: Portrait of Domingo Faustino Sarmiento
-		Tooltip: A painting of Domingo Faustino Sarmiento
+	MauricioMacri: {
+		DisplayName: Portrait of Mauricio Macri
+		Tooltip: A painting of Mauricio Macri
 	}
 }

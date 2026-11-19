@@ -7,11 +7,11 @@ namespace PresidentesArgentinos.Content
 		public static readonly PaintingInfo[] All = {
 			new("AlbertoFernandez", 3, 4, new[] { ("Wood", 10), ("Amethyst", 1) }),
 			new("CristinaKirchner", 3, 4, new[] { ("Wood", 10), ("Topaz", 1) }),
+			new("DomingoSarmiento", 3, 4, new[] { ("Wood", 10), ("Amber", 1) }),
 			new("JavierMilei", 3, 4, new[] { ("Wood", 10), ("Sapphire", 1) }),
-			new("MauricioMacri", 3, 4, new[] { ("Wood", 10), ("Emerald", 1) }),
 			new("JuanPeron", 3, 4, new[] { ("Wood", 10), ("Ruby", 1) }),
 			new("JulioRoca", 3, 4, new[] { ("Wood", 10), ("Diamond", 1) }),
-			new("DomingoSarmiento", 3, 4, new[] { ("Wood", 10), ("Amber", 1) }),
+			new("MauricioMacri", 3, 4, new[] { ("Wood", 10), ("Emerald", 1) }),
 		};
 	}
 }

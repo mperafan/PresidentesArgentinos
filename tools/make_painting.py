@@ -67,11 +67,13 @@ def crop_to_focus(photo, focus, aspect):
     return photo.crop((round(x0), round(y0), round(x0 + w), round(y0 + h)))
 
 
-def pixelate(img, width, height, colors):
+def pixelate(img, width, height, colors, enhance=True):
     """Shrink to width x height fat pixels with a small palette."""
     # Terraria colors are vivid: boost saturation and contrast a little
-    img = ImageEnhance.Color(img).enhance(1.25)
-    img = ImageEnhance.Contrast(img).enhance(1.1)
+    # (skipped for pixel art, which was already boosted)
+    if enhance:
+        img = ImageEnhance.Color(img).enhance(1.25)
+        img = ImageEnhance.Contrast(img).enhance(1.1)
 
     # Shrink in two steps and sharpen in between, at 4x the final size, so
     # the sharpening works on features the size of a final pixel: eyes,
@@ -86,10 +88,10 @@ def pixelate(img, width, height, colors):
     return img.convert("RGB")
 
 
-def framed(img, width, height, colors):
+def framed(img, width, height, colors, enhance=True):
     """Picture of width x height fat pixels with a 1-fat-pixel frame."""
     art = Image.new("RGB", (width, height))
-    art.paste(pixelate(img, width - 2, height - 2, colors), (1, 1))
+    art.paste(pixelate(img, width - 2, height - 2, colors, enhance), (1, 1))
     ImageDraw.Draw(art).rectangle([0, 0, width - 1, height - 1], outline=FRAME_COLOR)
     return art
 
@@ -105,19 +107,39 @@ def slice_into_tiles(picture, tiles_w, tiles_h):
     return sheet
 
 
-def make_painting(photo_path, name, size=DEFAULT_SIZE, focus=None, colors=DEFAULT_COLORS):
-    """Convert one photo. Returns the paths it wrote."""
-    tiles_w, tiles_h = size
-    photo = ImageOps.exif_transpose(Image.open(photo_path)).convert("RGB")
-    face = crop_to_focus(photo, focus, tiles_w / tiles_h)
+def load_pixel_art(path, tiles_w, tiles_h):
+    """Read finished pixel art (e.g. a preview) back at fat-pixel resolution.
 
-    # The painting, at fat-pixel resolution, then doubled to real pixels
-    art = framed(face, tiles_w * FAT_PER_TILE, tiles_h * FAT_PER_TILE, colors)
+    The image must have the painting's shape, at any whole-number scale,
+    with every fat pixel a solid square (like the previews this script makes).
+    """
+    img = Image.open(path).convert("RGB")
+    w, h = tiles_w * FAT_PER_TILE, tiles_h * FAT_PER_TILE
+    if img.width % w or img.height % h or img.width // w != img.height // h:
+        raise ValueError(f"{path.name} is {img.width}x{img.height}; pixel art for a "
+                         f"{tiles_w}x{tiles_h} painting must be {w}x{h} times a whole number")
+    return img.resize((w, h), Image.NEAREST)
+
+
+def make_painting(photo_path, name, size=DEFAULT_SIZE, focus=None, colors=DEFAULT_COLORS,
+                  pixel_art=False):
+    """Convert one photo (or use finished pixel art as-is). Returns the paths it wrote."""
+    tiles_w, tiles_h = size
+    if pixel_art:
+        art = load_pixel_art(Path(photo_path), tiles_w, tiles_h)
+        face = art.crop((1, 1, art.width - 1, art.height - 1))  # inside the frame, for the icon
+    else:
+        photo = ImageOps.exif_transpose(Image.open(photo_path)).convert("RGB")
+        face = crop_to_focus(photo, focus, tiles_w / tiles_h)
+        art = framed(face, tiles_w * FAT_PER_TILE, tiles_h * FAT_PER_TILE, colors)
+
+    # The painting at fat-pixel resolution, doubled to real pixels
     picture = art.resize((art.width * FAT, art.height * FAT), Image.NEAREST)
 
     # The inventory icon: same painting, at most 16 fat pixels big
     scale = 16 / max(art.size)
-    icon = framed(face, round(art.width * scale), round(art.height * scale), colors)
+    icon = framed(face, round(art.width * scale), round(art.height * scale), colors,
+                  enhance=not pixel_art)
     icon = icon.resize((icon.width * FAT, icon.height * FAT), Image.NEAREST)
 
     OUT.mkdir(parents=True, exist_ok=True)

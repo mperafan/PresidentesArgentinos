@@ -66,7 +66,8 @@ def read_config():
             entry = {
                 "name": name or camel_name(Path(photo).stem),
                 "display": display or None,
-                "focus": parse_focus(focus) if focus and focus != "-" else None,
+                "pixel_art": focus.lower() == "pixelart",
+                "focus": parse_focus(focus) if focus and focus not in ("-", "pixelart") else None,
                 "size": parse_size(size) if size and size != "-" else DEFAULT_SIZE,
                 "recipe": parse_recipe(recipe) if recipe and recipe != "-" else None,
             }
@@ -133,7 +134,7 @@ def main():
     for photo in photos:
         entry = settings.get(photo.name)
         if entry is None:
-            entry = {"name": camel_name(photo.stem), "display": None, "focus": None,
+            entry = {"name": camel_name(photo.stem), "display": None, "focus": None, "pixel_art": False,
                      "size": DEFAULT_SIZE, "recipe": None}
             print(f"  note: {photo.name} has no line in paintings.txt, using defaults")
         entry["display"] = entry["display"] or entry["name"]
@@ -156,7 +157,10 @@ def main():
         sys.exit("Two paintings have the same recipe; every painting needs its own")
 
     for photo, p in zip(photos, paintings):
-        make_painting(photo, p["name"], p["size"], p["focus"])
+        try:
+            make_painting(photo, p["name"], p["size"], p["focus"], pixel_art=p["pixel_art"])
+        except ValueError as err:
+            sys.exit(f"{photo.name}: {err}")
         recipe = " + ".join(f"{n} {i}" for i, n in p["recipe"])
         print(f"{p['name']:<22} {p['size'][0]}x{p['size'][1]}  {recipe}")
 
