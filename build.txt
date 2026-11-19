@@ -1,3 +1,4 @@
-displayName = Pink Bunny Mod
+displayName = Presidentes Argentinos
 author = mperafan
 version = 0.1
+buildIgnore = tools/*, *.md, .git*

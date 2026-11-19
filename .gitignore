@@ -6,3 +6,6 @@ obj/
 .vs/
 .idea/
 *.user
+
+# Converter previews (only for checking how a painting looks)
+tools/previews/
